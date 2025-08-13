@@ -1,14 +1,14 @@
-Future<String> getNameLater() {
-return Future.delayed(Duration(seconds: 2), () {
-return 'Your name is Alex!';
-});
+Future<String> getMessage(int seconds, String text) async {
+  return await Future.delayed(Duration(seconds: seconds), () {
+    return text;
+  });
 }
-void showMessage() async {
-print('Getting your name...');
-String message = await getNameLater();
-print(message);
-}
-void main() {
-showMessage();
-print('This runs while waiting...');
+
+Future<void> main() async {
+  // Start both futures at the same time
+  Future<String> future1 = getMessage(2, "Your computer has been hacked!");
+  Future<String> future2 = getMessage(1, "We are getting your credentials...");
+
+  print(await future2);
+  print(await future1);
 }
