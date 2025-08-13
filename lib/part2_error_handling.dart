@@ -1,16 +1,15 @@
-Future<String> fetchData() { 
- return Future.delayed(Duration(seconds: 2), () { 
- throw Exception('Something went wrong!'); 
- }); 
-} 
-void getSafeMessage() async { 
- try { 
- String message = await fetchData(); 
- print('Result: $message'); 
- } catch (e) { 
- print('Caught an error: $e'); 
- } 
+Future<String> simulateError() async {
+  return await Future.delayed(Duration(seconds: 2), () {
+    throw Exception("There's a problem in the system, please try again");
+  });
 }
-void main() { 
- getSafeMessage(); 
- print('Still running even if something goes wrong.'); } 
+
+Future<void> main() async {
+  try {
+    print("Starting process...");
+    String result = await simulateError();
+    print(result);
+  } catch (e) {
+    print("Caught an error: $e");
+  }
+}

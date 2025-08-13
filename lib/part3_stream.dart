@@ -1,17 +1,15 @@
-Stream<String> messageStream() async* { 
- yield 'First message'; 
- await Future.delayed(Duration(seconds: 1)); 
- yield 'Second message'; 
- await Future.delayed(Duration(seconds: 1)); 
- yield 'Third message'; 
+// Stream function that emits numbers 1–5 with delays
+Stream<int> numberStream() async* {
+  for (int i = 1; i <= 5; i++) {
+    await Future.delayed(Duration(seconds: 1));
+    yield i; // Emit the current number
+  }
 }
-void listenToMessages() { 
- messageStream().listen((msg) { 
- print('New: $msg'); 
- }); 
-} 
-void main() { 
- listenToMessages(); 
- print('Listening to messages...'); 
-} 
- 
+
+Future<void> main() async {
+  print("Starting Hacking...");
+  await for (int number in numberStream()) {
+    print("In: $number");
+  }
+  print("Stream finished!");
+}
