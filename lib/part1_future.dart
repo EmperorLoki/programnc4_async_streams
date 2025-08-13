@@ -5,7 +5,6 @@ Future<String> getMessage(int seconds, String text) async {
 }
 
 Future<void> main() async {
-  // Start both futures at the same time
   Future<String> future1 = getMessage(2, "Your computer has been hacked!");
   Future<String> future2 = getMessage(1, "We are getting your credentials...");
 
